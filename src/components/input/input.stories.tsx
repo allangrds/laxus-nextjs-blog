@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+
 import { SearchIcon } from '@chakra-ui/icons'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import { Input } from './input'
 import type { InputProps } from './input'
