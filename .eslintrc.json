@@ -7,6 +7,10 @@
   },
   "extends": ["next/core-web-vitals", "airbnb", "plugin:storybook/recommended"],
   "plugins": ["sort-destructure-keys"],
+  "globals": {
+    "JSX": true,
+    "React": true
+  },
   "rules": {
     "comma-dangle": [
       "error",
@@ -62,8 +66,45 @@
       }
     ],
     "space-before-function-paren": [2, "always"],
-    "sort-imports": "error",
+    "sort-imports": ["error", { "ignoreDeclarationSort": true }],
     "sort-destructure-keys/sort-destructure-keys": 2,
+    "import/prefer-default-export": 0,
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          ["internal", "unknown"],
+          "parent",
+          "sibling"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "builtin",
+            "position": "before"
+          },
+          { "pattern": "routes/**", "group": "internal" }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc"
+        },
+        "newlines-between": "always",
+        "pathGroupsExcludedImportTypes": ["react"]
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
       1,
