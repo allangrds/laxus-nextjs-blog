@@ -15,7 +15,7 @@ export const MenuToggle = ({ isOpen = false, toggle }: MenuToggleProps) => (
     {
       isOpen
         ? <CloseIcon height="6" width="6" />
-        : <HamburgerIcon height="6" width="6" />
+        : <HamburgerIcon height="8" width="8" />
     }
   </Box>
 )

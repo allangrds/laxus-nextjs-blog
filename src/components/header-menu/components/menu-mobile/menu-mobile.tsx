@@ -21,10 +21,11 @@ export const MenuMobile = ({ isOpen, navigation }: MenuDesktopProps) => (
     as="nav"
     position="fixed"
     width="100%"
+    height="100%"
     left="0"
-    top="32"
-    opacity="95%"
-    paddingLeft="2"
+    top="36"
+    opacity="98%"
+    paddingLeft="4"
   >
     <VStack
       gap="4"
@@ -41,7 +42,7 @@ export const MenuMobile = ({ isOpen, navigation }: MenuDesktopProps) => (
             alignItems="flex-start"
           >
             <Link href={item.path}>
-              <Text as="a" fontWeight="600" fontSize="2xl">
+              <Text as="a" fontWeight="600" fontSize="2xl" cursor="pointer">
                 {item.title}
               </Text>
             </Link>
@@ -58,7 +59,11 @@ export const MenuMobile = ({ isOpen, navigation }: MenuDesktopProps) => (
                       item.children.map((child) => (
                         <ListItem>
                           <Link href={child.path} key={child.title}>
-                            <Text as="a" fontWeight="600" fontSize="xl">
+                            <Text
+                              as="a"
+                              fontWeight="600"
+                              fontSize="xl"
+                            >
                               {child.title}
                             </Text>
                           </Link>

@@ -29,7 +29,7 @@ export const MenuDesktop = ({ navigation }: MenuDesktopProps) => (
         navigation.map((item) => (
           <HStack as={ListItem} gap="1" marginLeft="0 !important" key={item.title}>
             <Link href={item.path}>
-              <Text as="a" fontWeight="600">
+              <Text as="a" fontWeight="600" cursor="pointer">
                 {item.title}
               </Text>
             </Link>
