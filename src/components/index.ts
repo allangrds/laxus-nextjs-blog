@@ -1,4 +1,5 @@
 export * from './badge'
+export * from './layout'
 export * from './header-menu'
 export * from './post-item'
 export * from './post-title'
