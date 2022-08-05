@@ -1,10 +1,11 @@
 import type { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+
+import { ThemeProvider } from '../providers'
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <ChakraProvider resetCSS>
+  <ThemeProvider>
     <Component {...pageProps} />
-  </ChakraProvider>
+  </ThemeProvider>
 )
 
 export default MyApp
