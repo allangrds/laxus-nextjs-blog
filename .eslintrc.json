@@ -5,7 +5,7 @@
     "jest": true,
     "node": true
   },
-  "extends": ["next/core-web-vitals", "airbnb"],
+  "extends": ["next/core-web-vitals", "airbnb", "plugin:storybook/recommended"],
   "plugins": ["sort-destructure-keys"],
   "rules": {
     "comma-dangle": [
@@ -41,6 +41,26 @@
     "semi": ["error", "never"],
     "sort-keys": ["error"],
     "sort-vars": ["error"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "jest.setup.ts",
+          "**/*.test.js",
+          "**/*.test.jsx",
+          "**/*.test.ts",
+          "**/*.test.tsx",
+          "**/*.spec.js",
+          "**/*.spec.jsx",
+          "**/*.spec.ts",
+          "**/*.spec.tsx",
+          "**/*.stories.js",
+          "**/*.stories.jsx",
+          "**/*.stories.ts",
+          "**/*.stories.tsx"
+        ]
+      }
+    ],
     "space-before-function-paren": [2, "always"],
     "sort-destructure-keys/sort-destructure-keys": 2,
     "react/react-in-jsx-scope": "off",
