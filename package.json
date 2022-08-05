@@ -17,11 +17,15 @@
     "commit": "cz",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "typecheck": "tsc --noEmit --incremental false",
-    "eslint": "eslint './pages/' --ext .json,.js,.jsx,.ts,.tsx",
+    "eslint": "eslint './src/' --ext .json,.js,.jsx,.ts,.tsx",
     "storybook": "start-storybook -p 6006 -s ./public",
     "build-storybook": "build-storybook -s ./public"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.2.6",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "framer-motion": "^7.0.0",
     "next": "12.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0"

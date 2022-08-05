@@ -62,6 +62,7 @@
       }
     ],
     "space-before-function-paren": [2, "always"],
+    "sort-imports": "error",
     "sort-destructure-keys/sort-destructure-keys": 2,
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
