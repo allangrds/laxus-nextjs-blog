@@ -5,7 +5,8 @@
     "jest": true,
     "node": true
   },
-  "extends": ["next/core-web-vitals"],
+  "extends": ["next/core-web-vitals", "airbnb"],
+  "plugins": ["sort-destructure-keys"],
   "rules": {
     "comma-dangle": [
       "error",
@@ -40,6 +41,21 @@
     "semi": ["error", "never"],
     "sort-keys": ["error"],
     "sort-vars": ["error"],
-    "space-before-function-paren": [2, "always"]
+    "space-before-function-paren": [2, "always"],
+    "sort-destructure-keys/sort-destructure-keys": 2,
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "react/function-component-definition": [
+      1,
+      {
+        "namedComponents": "arrow-function"
+      }
+    ]
   }
 }
