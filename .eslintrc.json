@@ -1,3 +1,45 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never",
+        "imports": "always-multiline",
+        "objects": "always-multiline"
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 80,
+        "ignoreComments": true,
+        "ignoreRegExpLiterals": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "tabWidth": 2
+      }
+    ],
+    "max-params": [
+      "error",
+      {
+        "max": 3
+      }
+    ],
+    "multiline-ternary": ["error", "always-multiline"],
+    "semi": ["error", "never"],
+    "sort-keys": ["error"],
+    "sort-vars": ["error"],
+    "space-before-function-paren": [2, "always"]
+  }
 }
