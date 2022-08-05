@@ -49,7 +49,9 @@ export const PostItem = ({
     <HStack gap="1" marginTop="2">
       {
         tags.map((tag: string) => (
-          <Badge colorScheme="yellow">{tag}</Badge>
+          <Badge colorScheme="yellow" key={tag}>
+            {tag}
+          </Badge>
         ))
       }
     </HStack>
