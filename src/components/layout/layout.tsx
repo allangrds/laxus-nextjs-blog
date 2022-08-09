@@ -11,7 +11,7 @@ export const Layout = ({ children }: LayoutProps) => (
   <>
     <HStack justifyContent="center" backgroundColor="blue.50">
       <Box
-        maxWidth="container.md"
+        maxWidth="container.lg"
         width="100%"
         paddingX={6}
       >
@@ -32,7 +32,7 @@ export const Layout = ({ children }: LayoutProps) => (
     </HStack>
     <HStack justifyContent="center" paddingY="8" as="main">
       <Box
-        maxWidth="container.md"
+        maxWidth="container.lg"
         width="100%"
         paddingX="6"
       >
