@@ -58,7 +58,7 @@ export const MenuMobile = ({ isOpen, navigation }: MenuDesktopProps) => (
                   >
                     {
                       item.children.map((child) => (
-                        <ListItem>
+                        <ListItem key={child.title}>
                           <Link href={child.path} key={child.title}>
                             <Text
                               as="a"

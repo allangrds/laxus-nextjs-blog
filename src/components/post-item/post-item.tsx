@@ -1,57 +1,68 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import {
   Box, HStack, Heading, Text,
 } from '@chakra-ui/react'
+import Link from 'next/link'
 
 import { Badge } from '../badge'
 
 export type PostItemProps = {
-  description?: string;
+  excerpt?: string;
   subtitle?: string;
+  slug: string;
   tags: string[];
   title: string;
 }
 
 export const PostItem = ({
-  description, subtitle, tags, title,
+  excerpt, slug, subtitle, tags, title,
 }: PostItemProps) => (
   <Box as="article">
-    <Heading
-      as="h1"
-      fontSize="xl"
-      fontWeight="700"
-      color="black"
-    >
-      {title}
-    </Heading>
-    {
-      subtitle
-        ? (
-          <Heading
-            as="h2"
-            fontSize="lg"
-            fontWeight="600"
-            color="gray.600"
-          >
-            {subtitle}
-          </Heading>
-        )
-        : undefined
-    }
-    {
-      description
-        ? (
-          <Text color="black" marginTop="4">
-            {description}
-          </Text>
-        )
-        : undefined
-    }
+    <Link href={`posts/${slug}`}>
+      <a style={{ width: '100%' }}>
+        <Heading
+          as="h1"
+          fontSize="xl"
+          fontWeight="700"
+          color="black"
+        >
+          {title}
+        </Heading>
+        {
+          subtitle
+            ? (
+              <Heading
+                as="h2"
+                fontSize="lg"
+                fontWeight="600"
+                color="gray.600"
+              >
+                {subtitle}
+              </Heading>
+            )
+            : undefined
+        }
+        {
+          excerpt
+            ? (
+              <Text color="black" marginTop="4">
+                {excerpt}
+              </Text>
+            )
+            : undefined
+        }
+      </a>
+    </Link>
     <HStack gap="1" marginTop="2">
       {
         tags.map((tag: string) => (
-          <Badge colorScheme="yellow" key={tag}>
-            {tag}
-          </Badge>
+          <Link href={`tags/${tag}`} key={tag}>
+            <a>
+              <Badge colorScheme="yellow" key={tag}>
+                {tag}
+              </Badge>
+            </a>
+          </Link>
         ))
       }
     </HStack>
