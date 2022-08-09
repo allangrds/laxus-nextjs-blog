@@ -23,9 +23,10 @@ export const MenuMobile = ({ isOpen, navigation }: MenuDesktopProps) => (
     width="100%"
     height="100%"
     left="0"
-    top="36"
+    top="0"
     opacity="98%"
     paddingLeft="4"
+    paddingTop="10"
   >
     <VStack
       gap="4"

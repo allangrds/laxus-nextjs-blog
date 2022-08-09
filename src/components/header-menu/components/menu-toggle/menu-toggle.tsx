@@ -11,6 +11,9 @@ export const MenuToggle = ({ isOpen = false, toggle }: MenuToggleProps) => (
     display={{ base: 'block', md: 'none' }}
     onClick={toggle}
     cursor="pointer"
+    position={isOpen ? 'fixed' : 'static'}
+    zIndex="100"
+    right="8"
   >
     {
       isOpen
