@@ -1,13 +1,19 @@
-import mdxPrism from 'mdx-prism'
+import path from 'path'
+
+import { bundleMDX } from 'mdx-bundler'
 import type { NextPage } from 'next'
-import { serialize } from 'next-mdx-remote/serialize'
-import remarkAutolinkHeadings from 'remark-autolink-headings'
-import remarkCodeTitles from 'remark-code-titles'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeSlug from 'rehype-slug'
+
+// import remarkCodeTitles from 'remark-code-titles'
 import remarkPrism from 'remark-prism'
-import remarkSlug from 'remark-slug'
 
 import { getAllPosts, getPostBySlug } from '../../lib/api'
 import { PostDetail } from '../../templates'
+
+import remarkCodeTitles from './remark-code-title'
+
+const root = process.cwd()
 
 const PostsSlug: NextPage = (post) => (
   <PostDetail post={post} />
@@ -28,30 +34,30 @@ export async function getStaticPaths () {
 export async function getStaticProps ({ params }) {
   const { slug } = params
   const post = getPostBySlug(slug)
-  const content = await serialize(post.content, {
-    mdxOptions: {
-      // rehypePlugins: [mdxPrism],
-      remarkPlugins: [
-        remarkAutolinkHeadings,
-        remarkSlug,
-        [remarkPrism, {
-          plugins: [
-            'line-numbers',
-          ],
-        }],
+
+  const { code, frontmatter } = await bundleMDX({
+    source: post?.content,
+    cwd: path.join(root),
+    mdxOptions (options) {
+      options.remarkPlugins = [
+        remarkPrism,
         remarkCodeTitles,
-      ],
+      ]
+      options.rehypePlugins = [
+        rehypeSlug,
+        rehypeAutolinkHeadings,
+      ]
+
+      return options
     },
   })
 
-  // const contentString = renderToString(content)
-
-  console.log(content)
+  console.log(frontmatter)
 
   return {
     props: {
-      ...post,
-      content,
+      content: code,
+      frontmatter: post?.frontmatter,
     },
   }
 }

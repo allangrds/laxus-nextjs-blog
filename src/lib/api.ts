@@ -17,14 +17,16 @@ export function getPostBySlug (slug: string) {
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { content, data } = matter(fileContents)
 
-  const date = format(new Date(data.date), "dd 'de' MMMM 'de' yyyy", {
-    locale: pt,
-  })
+  // const date = format(new Date(data.date), "dd 'de' MMMM 'de' yyyy", {
+  //   locale: pt,
+  // })
 
   return {
     content,
-    date: data.date.toString(),
-    frontmatter: { ...data, date },
+    // date: data.date.toString(),
+    fileContents,
+    // frontmatter: { ...data, date },
+    frontmatter: data,
     slug: realSlug,
   }
 }
