@@ -1,11 +1,10 @@
-// import rehypeToc from '@jsdevtools/rehype-toc'
+import mdxPrism from 'mdx-prism'
 import type { NextPage } from 'next'
 import { serialize } from 'next-mdx-remote/serialize'
-// import { renderToString } from 'react-dom/server'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeCodeTitles from 'rehype-code-titles'
-import rehypePrism from 'rehype-prism-plus'
-import rehypeSlug from 'rehype-slug'
+import remarkAutolinkHeadings from 'remark-autolink-headings'
+import remarkCodeTitles from 'remark-code-titles'
+import remarkPrism from 'remark-prism'
+import remarkSlug from 'remark-slug'
 
 import { getAllPosts, getPostBySlug } from '../../lib/api'
 import { PostDetail } from '../../templates'
@@ -31,14 +30,16 @@ export async function getStaticProps ({ params }) {
   const post = getPostBySlug(slug)
   const content = await serialize(post.content, {
     mdxOptions: {
-      rehypePlugins: [
-        rehypeSlug,
-        [rehypeAutolinkHeadings, {
-          behavior: 'wrap',
+      // rehypePlugins: [mdxPrism],
+      remarkPlugins: [
+        remarkAutolinkHeadings,
+        remarkSlug,
+        [remarkPrism, {
+          plugins: [
+            'line-numbers',
+          ],
         }],
-        // rehypeToc,
-        rehypeCodeTitles,
-        rehypePrism,
+        remarkCodeTitles,
       ],
     },
   })
