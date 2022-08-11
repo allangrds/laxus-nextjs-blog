@@ -54,7 +54,17 @@ export const PostItem = ({
         }
       </a>
     </Link>
-    <HStack gap="1" marginTop="2">
+    <HStack
+      gap="2"
+      marginTop="2"
+      justifyContent="flex-start"
+      flexWrap="wrap"
+      sx={{
+        a: {
+          marginLeft: '0 !important',
+        },
+      }}
+    >
       {
         categories.map((category: string) => (
           <Link href={`categories/${category}`} key={category}>
