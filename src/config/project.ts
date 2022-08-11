@@ -1,5 +1,6 @@
 export const configuration = {
   ui: {
+    about: 'About',
     header: {
       navigation: {
         about: 'about',

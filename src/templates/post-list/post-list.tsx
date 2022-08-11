@@ -16,26 +16,19 @@ export const PostList = ({ posts }) => {
         gap="10"
         paddingY="8"
       >
-        <Heading
-          width="100%"
-          as="h1"
-          fontSize="2xl"
-        >
-          Post
-        </Heading>
         {
-        sortedPosts.map((post) => (
-          <PostItem
-            key={post.slug}
-            excerpt={post.frontmatter.excerpt}
-            subtitle={post.frontmatter.subtitle}
-            categories={post.frontmatter.categories}
-            tags={post.frontmatter.tags}
-            title={post.frontmatter.title}
-            slug={post.slug}
-          />
-        ))
-      }
+          sortedPosts.map((post) => (
+            <PostItem
+              key={post.slug}
+              excerpt={post.frontmatter.excerpt}
+              subtitle={post.frontmatter.subtitle}
+              categories={post.frontmatter.categories}
+              tags={post.frontmatter.tags}
+              title={post.frontmatter.title}
+              slug={post.slug}
+            />
+          ))
+        }
       </VStack>
     </Box>
   )
