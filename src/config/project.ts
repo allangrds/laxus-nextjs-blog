@@ -1,6 +1,7 @@
 export const configuration = {
   ui: {
     about: 'About',
+    categories: 'Categories',
     header: {
       navigation: {
         about: 'about',
@@ -12,5 +13,6 @@ export const configuration = {
         text: 'Laxus',
       },
     },
+    tags: 'Tags',
   },
 }
