@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import {
-  Box, HStack, Icon, IconButton, Text,
+  Box, HStack, Icon, IconButton, Text, chakra,
 } from '@chakra-ui/react'
 
 export const Pre = (props) => {
@@ -12,10 +12,12 @@ export const Pre = (props) => {
   const onEnter = () => {
     setHovered(true)
   }
+
   const onExit = () => {
     setHovered(false)
     setCopied(false)
   }
+
   const onCopy = () => {
     setCopied(true)
     navigator.clipboard.writeText(textInput.current.textContent)
@@ -28,10 +30,14 @@ export const Pre = (props) => {
 
   return (
     <Box
+      display="grid"
       ref={textInput}
       onMouseEnter={onEnter}
       position="relative"
       onMouseLeave={onExit}
+      marginY="8"
+      maxWidth={['none', 'none', 'none', '700px']}
+      overflowX="scroll"
     >
       {
         hovered
@@ -39,7 +45,7 @@ export const Pre = (props) => {
             <HStack
               position="absolute"
               right="2"
-              top="2"
+              top="4"
             >
               {
                 copied
@@ -99,9 +105,23 @@ export const Pre = (props) => {
           )
           : undefined
       }
-      <pre className={props.className}>
+      <chakra.pre
+        className={props.className}
+        maxWidth={['none', 'none', 'none', '700px']}
+        overflowX="scroll"
+        sx={{
+          '> code': {
+            ':before': {
+              content: '""',
+            },
+            ':after': {
+              content: '""',
+            },
+          },
+        }}
+      >
         {props.children}
-      </pre>
+      </chakra.pre>
     </Box>
   )
 }

@@ -12,6 +12,7 @@ import { getAllPosts, getPostBySlug } from '../../lib/api'
 import { PostDetail } from '../../templates'
 
 import remarkCodeTitles from './remark-code-title'
+import remarkTocHeadings from './remark-toc-headings'
 
 const root = process.cwd()
 
@@ -34,6 +35,7 @@ export async function getStaticPaths () {
 export async function getStaticProps ({ params }) {
   const { slug } = params
   const post = getPostBySlug(slug)
+  const toc = []
 
   const { code, frontmatter } = await bundleMDX({
     source: post?.content,
@@ -42,6 +44,7 @@ export async function getStaticProps ({ params }) {
       options.remarkPlugins = [
         remarkPrism,
         remarkCodeTitles,
+        [remarkTocHeadings, { exportRef: toc }],
       ]
       options.rehypePlugins = [
         rehypeSlug,
@@ -52,12 +55,11 @@ export async function getStaticProps ({ params }) {
     },
   })
 
-  console.log(frontmatter)
-
   return {
     props: {
       content: code,
       frontmatter: post?.frontmatter,
+      toc,
     },
   }
 }

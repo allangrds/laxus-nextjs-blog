@@ -1,4 +1,4 @@
-import { Heading, VStack } from '@chakra-ui/react'
+import { Box, Heading, VStack } from '@chakra-ui/react'
 
 import { PostItem } from '../../components'
 
@@ -7,17 +7,23 @@ export const PostList = ({ posts }) => {
     new Date(post1.date) > new Date(post2.date) ? -1 : 1))
 
   return (
-    <VStack
-      gap="10"
+    <Box
+      maxWidth="container.lg"
+      width="100%"
+      paddingX="6"
     >
-      <Heading
-        width="100%"
-        as="h1"
-        fontSize="2xl"
+      <VStack
+        gap="10"
+        paddingY="8"
       >
-        Post
-      </Heading>
-      {
+        <Heading
+          width="100%"
+          as="h1"
+          fontSize="2xl"
+        >
+          Post
+        </Heading>
+        {
         sortedPosts.map((post) => (
           <PostItem
             key={post.slug}
@@ -29,6 +35,7 @@ export const PostList = ({ posts }) => {
           />
         ))
       }
-    </VStack>
+      </VStack>
+    </Box>
   )
 }

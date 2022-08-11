@@ -30,14 +30,8 @@ export const Layout = ({ children }: LayoutProps) => (
         />
       </Box>
     </HStack>
-    <HStack justifyContent="center" paddingY="8" as="main">
-      <Box
-        maxWidth="container.lg"
-        width="100%"
-        paddingX="6"
-      >
-        { children }
-      </Box>
+    <HStack justifyContent="center" as="main">
+      { children }
     </HStack>
   </>
 )

@@ -7,25 +7,25 @@ export const Fonts = () => (
         font-family: 'Inter';
         font-style: normal;
         font-weight: 400;
-        src: url('./fonts/Inter-Regular.ttf');
+        src: url('/fonts/Inter-Regular.ttf');
       }
       @font-face {
         font-family: 'Inter';
         font-style: normal;
         font-weight: 500;
-        src: url('./fonts/Inter-Medium.ttf');
+        src: url('/fonts/Inter-Medium.ttf');
       }
       @font-face {
         font-family: 'Inter';
         font-style: normal;
         font-weight: 600;
-        src: url('./fonts/Inter-SemiBold.ttf');
+        src: url('/fonts/Inter-SemiBold.ttf');
       }
       @font-face {
         font-family: 'Inter';
         font-style: normal;
         font-weight: 700;
-        src: url('./fonts/Inter-Bold.ttf');
+        src: url('/fonts/Inter-Bold.ttf');
       }
     `}
   />

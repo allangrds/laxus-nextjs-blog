@@ -6,12 +6,13 @@ export type PostTitleProps = {
 }
 
 export const PostTitle = ({ subtitle, title }: PostTitleProps) => (
-  <Box paddingY="10">
+  <Box>
     <Heading
       as="h1"
-      fontSize="2xl"
+      fontSize="4xl"
       fontWeight="700"
       color="black"
+      marginBottom="1"
     >
       {title}
     </Heading>
@@ -20,7 +21,7 @@ export const PostTitle = ({ subtitle, title }: PostTitleProps) => (
         ? (
           <Heading
             as="h2"
-            fontSize="xl"
+            fontSize="2xl"
             fontWeight="600"
             color="gray.600"
           >
