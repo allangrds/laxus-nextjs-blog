@@ -31,7 +31,7 @@ const types = {
     success: {
       element: SuccessIcon,
       width: '23.25px',
-      height: '17.5px',
+      height: '19.5px',
     },
     warning: {
       element: WarningIcon,

@@ -5,7 +5,7 @@ import {
   Grid,
   GridItem,
   HStack,
-  Image,
+  Icon,
   List,
   ListItem,
   Popover,
@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react'
 import Link from 'next/link'
 
+import DownArrowIcon from '../../../../assets/images/down-arrow.svg'
 import type { Navigation } from '../../types/navigation'
 
 type MenuDesktopProps = {
@@ -40,13 +41,13 @@ export const MenuDesktop = ({ navigation }: MenuDesktopProps) => (
                     <PopoverTrigger>
                       <Button
                         _hover={{
-                          backgroundColor: 'white',
+                          backgroundColor: 'blue.50',
                         }}
                         _active={{
-                          backgroundColor: 'white',
+                          backgroundColor: 'blue.50',
                         }}
                         minWidth="none"
-                        backgroundColor="white"
+                        backgroundColor="blue.50"
                         marginLeft="0 !important"
                         padding="0"
                         sx={{
@@ -55,9 +56,9 @@ export const MenuDesktop = ({ navigation }: MenuDesktopProps) => (
                           },
                         }}
                         leftIcon={(
-                          <Image
-                            maxWidth="17px"
-                            src={require('../../../../assets/images/down-arrow.svg')}
+                          <Icon
+                            width="19px"
+                            as={DownArrowIcon}
                           />
                         )}
                       />
@@ -74,9 +75,10 @@ export const MenuDesktop = ({ navigation }: MenuDesktopProps) => (
                               <GridItem key={child.title}>
                                 <Link href={child.path}>
                                   <Text
+                                    cursor="pointer"
                                     as="a"
                                     _hover={{
-                                      color: 'blue.100',
+                                      color: 'blue.200',
                                     }}
                                   >
                                     {child.title}

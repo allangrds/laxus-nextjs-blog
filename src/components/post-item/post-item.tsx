@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { Badge } from '../badge'
 
 export type PostItemProps = {
+  categories: string[];
   excerpt?: string;
   subtitle?: string;
   slug: string;
@@ -15,7 +16,7 @@ export type PostItemProps = {
 }
 
 export const PostItem = ({
-  excerpt, slug, subtitle, tags, title,
+  categories, excerpt, slug, subtitle, tags, title,
 }: PostItemProps) => (
   <Box as="article">
     <Link href={`posts/${slug}`}>
@@ -54,6 +55,17 @@ export const PostItem = ({
       </a>
     </Link>
     <HStack gap="1" marginTop="2">
+      {
+        categories.map((category: string) => (
+          <Link href={`categories/${category}`} key={category}>
+            <a>
+              <Badge colorScheme="blue" key={category}>
+                {category}
+              </Badge>
+            </a>
+          </Link>
+        ))
+      }
       {
         tags.map((tag: string) => (
           <Link href={`tags/${tag}`} key={tag}>

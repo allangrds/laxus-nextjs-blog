@@ -1,15 +1,13 @@
 import type { AppProps } from 'next/app'
 
-import { Layout } from '../components'
 import { ThemeProvider } from '../providers'
 
+import './index.css'
 import './prism.css'
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <ThemeProvider>
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <Component {...pageProps} />
   </ThemeProvider>
 )
 

@@ -9,6 +9,8 @@ export const Pre = (props) => {
   const [hovered, setHovered] = React.useState(false)
   const [copied, setCopied] = React.useState(false)
 
+  // console.log({ props })
+
   const onEnter = () => {
     setHovered(true)
   }
@@ -119,6 +121,7 @@ export const Pre = (props) => {
             },
           },
         }}
+        {...props}
       >
         {props.children}
       </chakra.pre>

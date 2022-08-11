@@ -29,6 +29,7 @@ export const PostList = ({ posts }) => {
             key={post.slug}
             excerpt={post.frontmatter.excerpt}
             subtitle={post.frontmatter.subtitle}
+            categories={post.frontmatter.categories}
             tags={post.frontmatter.tags}
             title={post.frontmatter.title}
             slug={post.slug}

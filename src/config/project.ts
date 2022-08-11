@@ -2,10 +2,10 @@ export const configuration = {
   ui: {
     header: {
       navigation: {
-        about: 'About',
-        categories: 'Categories',
-        home: 'Home',
-        tags: 'Tags',
+        about: 'about',
+        categories: 'categories',
+        home: 'home',
+        tags: 'tags',
       },
       title: {
         text: 'Laxus',

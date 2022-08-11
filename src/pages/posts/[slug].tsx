@@ -1,23 +1,16 @@
-import path from 'path'
-
-import { bundleMDX } from 'mdx-bundler'
 import type { NextPage } from 'next'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeSlug from 'rehype-slug'
 
-// import remarkCodeTitles from 'remark-code-titles'
-import remarkPrism from 'remark-prism'
-
-import { getAllPosts, getPostBySlug } from '../../lib/api'
+import { Layout } from '../../components'
+import {
+  getAllPosts,
+  getPostDetail,
+} from '../../lib/api'
 import { PostDetail } from '../../templates'
 
-import remarkCodeTitles from './remark-code-title'
-import remarkTocHeadings from './remark-toc-headings'
-
-const root = process.cwd()
-
-const PostsSlug: NextPage = (post) => (
-  <PostDetail post={post} />
+const PostsSlug: NextPage = ({ categories, post, tags }) => (
+  <Layout categories={categories} tags={tags}>
+    <PostDetail post={post} />
+  </Layout>
 )
 
 export default PostsSlug
@@ -34,32 +27,9 @@ export async function getStaticPaths () {
 
 export async function getStaticProps ({ params }) {
   const { slug } = params
-  const post = getPostBySlug(slug)
-  const toc = []
-
-  const { code, frontmatter } = await bundleMDX({
-    source: post?.content,
-    cwd: path.join(root),
-    mdxOptions (options) {
-      options.remarkPlugins = [
-        remarkPrism,
-        remarkCodeTitles,
-        [remarkTocHeadings, { exportRef: toc }],
-      ]
-      options.rehypePlugins = [
-        rehypeSlug,
-        rehypeAutolinkHeadings,
-      ]
-
-      return options
-    },
-  })
+  const post = await getPostDetail(slug)
 
   return {
-    props: {
-      content: code,
-      frontmatter: post?.frontmatter,
-      toc,
-    },
+    props: post,
   }
 }
