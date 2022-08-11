@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 
 import { Layout } from '../../components'
 import {
@@ -7,9 +7,11 @@ import {
 } from '../../lib/api'
 import { PostDetail } from '../../templates'
 
-const PostsSlug: NextPage = ({ categories, post, tags }) => (
+const PostsSlug: NextPage = ({
+  categories, host, post, tags,
+}) => (
   <Layout categories={categories} tags={tags}>
-    <PostDetail post={post} />
+    <PostDetail host={host} post={post} />
   </Layout>
 )
 
@@ -28,8 +30,12 @@ export async function getStaticPaths () {
 export async function getStaticProps ({ params }) {
   const { slug } = params
   const post = await getPostDetail(slug)
+  const host = process.env.HOST || null
 
   return {
-    props: post,
+    props: {
+      host,
+      ...post,
+    },
   }
 }

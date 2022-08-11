@@ -11,6 +11,19 @@ import {
   chakra,
 } from '@chakra-ui/react'
 import { getMDXComponent } from 'mdx-bundler/client'
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from 'next-share'
+import { useRouter } from 'next/router'
 
 import {
   Alert,
@@ -115,7 +128,8 @@ const components = {
   ),
 }
 
-export const PostDetail = ({ post }) => {
+export const PostDetail = ({ host, post }) => {
+  const router = useRouter()
   const { content, frontmatter, toc } = post
   const Component = React.useMemo(() => getMDXComponent(content), [content])
 
@@ -139,7 +153,7 @@ export const PostDetail = ({ post }) => {
           maxWidth="container.lg"
           width="100%"
           paddingX="6"
-          paddingY="8"
+          paddingTop="8"
         >
           <Grid
             templateColumns={['1fr', '1fr', '1fr', '1fr 250px']}
@@ -151,6 +165,44 @@ export const PostDetail = ({ post }) => {
             <Toc toc={toc} />
           </Grid>
         </Box>
+      </HStack>
+      <HStack width="100%" justifyContent="center">
+        <HStack
+          maxWidth="container.lg"
+          width="100%"
+          paddingX="6"
+          paddingY="8"
+        >
+          <FacebookShareButton
+            url={`${host}/${router.asPath}`}
+            quote="next-share is a social share buttons for your next React apps."
+            hashtag="#nextshare"
+          >
+            <FacebookIcon size={42} round />
+          </FacebookShareButton>
+          <TwitterShareButton
+            url="https://github.com/next-share"
+            title="next-share is a social share buttons for your next React apps."
+          >
+            <TwitterIcon size={42} round />
+          </TwitterShareButton>
+          <LinkedinShareButton url="https://github.com/next-share">
+            <LinkedinIcon size={42} round />
+          </LinkedinShareButton>
+          <TelegramShareButton
+            url="https://github.com/next-share"
+            title="next-share is a social share buttons for your next React apps."
+          >
+            <TelegramIcon size={42} round />
+          </TelegramShareButton>
+          <WhatsappShareButton
+            url="https://github.com/next-share"
+            title="next-share is a social share buttons for your next React apps."
+            separator=":: "
+          >
+            <WhatsappIcon size={42} round />
+          </WhatsappShareButton>
+        </HStack>
       </HStack>
     </Box>
   )
