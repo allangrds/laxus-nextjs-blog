@@ -19,7 +19,7 @@ const buildMenuWithChildren = (
 
   return {
     children: values.map((value: string) => ({
-      path: `${type}/${value}`,
+      path: `/${type}/${value}`,
       title: value,
     })),
     path: `/${type}`,

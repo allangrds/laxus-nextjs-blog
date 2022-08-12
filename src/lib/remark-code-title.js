@@ -1,19 +1,17 @@
 import { visit } from 'unist-util-visit'
 
-export default function remarkCodeTitles(options) {
-  return (tree) =>
-    visit(tree, 'element', (node, index, parent) => {
+export default function remarkCodeTitles (options) {
+  return (tree) => visit(tree, 'element', (node, index, parent) => {
+    // if (node.tagName === 'code') {
+    //   console.log(node)
+    //   console.log('----')
+    // }
 
-      // if (node.tagName === 'code') {
-      //   console.log(node)
-      //   console.log('----')
-      // }
-
-      // if (node.tagName === 'code' && node.data && node.data.meta) {
-      //   node.properties.meta = node.data.meta
-      //   console.log('addd')
-      // }
-    })
+    // if (node.tagName === 'code' && node.data && node.data.meta) {
+    //   node.properties.meta = node.data.meta
+    //   console.log('addd')
+    // }
+  })
 }
 
 // import { visit } from 'unist-util-visit'
@@ -48,4 +46,3 @@ export default function remarkCodeTitles(options) {
 //     node.lang = language
 //   })
 // }
-

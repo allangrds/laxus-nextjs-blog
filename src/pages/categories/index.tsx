@@ -4,12 +4,12 @@ import {
 import type { NextPage } from 'next'
 import Link from 'next/link'
 
-import { Layout } from '../components'
-import { configuration } from '../config'
+import { Layout } from '../../components'
+import { configuration } from '../../config'
 import {
   getCategoriesFromPosts,
   getTagsFromPosts,
-} from '../lib/api'
+} from '../../lib/api'
 
 const Home: NextPage = ({ categories, tags }) => (
   <Layout categories={categories} tags={tags}>
@@ -31,7 +31,7 @@ const Home: NextPage = ({ categories, tags }) => (
             {
               categories.map((category) => (
                 <ListItem>
-                  <Link href={`categories/${category}`}>
+                  <Link href={`/categories/${category}`}>
                     <Text
                       as="a"
                       cursor="pointer"

@@ -14,5 +14,6 @@ export const configuration = {
       },
     },
     tags: 'Tags',
+    'posts-of': 'Posts of',
   },
 }

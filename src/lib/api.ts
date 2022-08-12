@@ -65,7 +65,7 @@ export function getCategoriesFromPosts () {
   return uniqueCategories
 }
 
-export function getTagsFromPosts () {
+export function getTagsFromPosts (): string[] {
   const posts = getAllPosts()
   const allTags = posts
     .map((post) => post.frontmatter.tags)
@@ -110,4 +110,26 @@ export const getPostDetail = async (slug: string) => {
     },
     tags,
   }
+}
+
+export function getAllPostsFromTag (slug: string) {
+  const posts = getAllPosts()
+  const filteredPosts = posts.filter((post) => (
+    post.frontmatter.tags.some(
+      (element: string) => element === slug
+    )
+  ))
+
+  return filteredPosts
+}
+
+export function getAllPostsFromCategory (slug: string) {
+  const posts = getAllPosts()
+  const filteredPosts = posts.filter((post) => (
+    post.frontmatter.categories.some(
+      (element: string) => element === slug
+    )
+  ))
+
+  return filteredPosts
 }

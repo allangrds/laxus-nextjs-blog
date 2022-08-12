@@ -67,7 +67,7 @@ export const PostItem = ({
     >
       {
         categories.map((category: string) => (
-          <Link href={`categories/${category}`} key={category}>
+          <Link href={`/categories/${category}`} key={category}>
             <a>
               <Badge colorScheme="blue" key={category}>
                 {category}
@@ -78,7 +78,11 @@ export const PostItem = ({
       }
       {
         tags.map((tag: string) => (
-          <Link href={`tags/${tag}`} key={tag}>
+          <Link
+            href={`/tags/${tag}`}
+            as={`/tags/${tag}`}
+            key={tag}
+          >
             <a>
               <Badge colorScheme="yellow" key={tag}>
                 {tag}
