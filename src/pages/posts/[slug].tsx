@@ -8,10 +8,10 @@ import {
 import { PostDetail } from '../../templates'
 
 const PostsSlug: NextPage = ({
-  categories, host, post, tags,
+  categories, host, post, slug, tags,
 }) => (
   <Layout categories={categories} tags={tags}>
-    <PostDetail host={host} post={post} />
+    <PostDetail host={host} post={post} slug={slug} />
   </Layout>
 )
 
@@ -36,6 +36,7 @@ export async function getStaticProps ({ params }) {
     props: {
       host,
       ...post,
+      slug,
     },
   }
 }

@@ -1,5 +1,6 @@
 export * from './alert'
 export * from './badge'
+export * from './comments'
 export * from './layout'
 export * from './header-menu'
 export * from './quote'

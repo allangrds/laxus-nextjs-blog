@@ -28,6 +28,7 @@ import { useRouter } from 'next/router'
 import {
   Alert,
   Badge,
+  Comments,
   PostTitle,
   Pre,
   Quote,
@@ -128,7 +129,7 @@ const components = {
   ),
 }
 
-export const PostDetail = ({ host, post }) => {
+export const PostDetail = ({ host, post, slug }) => {
   const router = useRouter()
   const { content, frontmatter, toc } = post
   const Component = React.useMemo(() => getMDXComponent(content), [content])
@@ -203,6 +204,19 @@ export const PostDetail = ({ host, post }) => {
             <WhatsappIcon size={42} round />
           </WhatsappShareButton>
         </HStack>
+      </HStack>
+      <HStack width="100%" justifyContent="center">
+        <Box
+          maxWidth="container.lg"
+          width="100%"
+          paddingX="6"
+          paddingY="8"
+        >
+          <Comments
+            slug={slug}
+            title={frontmatter.title}
+          />
+        </Box>
       </HStack>
     </Box>
   )
