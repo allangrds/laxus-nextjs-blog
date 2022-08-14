@@ -2,6 +2,7 @@ import {
   Box, Heading, ListItem, Text, UnorderedList, VStack,
 } from '@chakra-ui/react'
 import type { NextPage } from 'next'
+import { NextSeo } from 'next-seo'
 import Link from 'next/link'
 
 import { Layout } from '../../components'
@@ -12,23 +13,27 @@ import {
 } from '../../lib/api'
 
 const Home: NextPage = ({ categories, tags }) => (
-  <Layout categories={categories} tags={tags}>
-    <Box
-      maxWidth="container.lg"
-      width="100%"
-      paddingX="6"
-    >
-      <VStack
-        gap="4"
-        paddingY="8"
-        alignItems="flex-start"
+  <>
+    <NextSeo
+      title={`${configuration.ui.tags} | ${configuration.ui.header.title.text}`}
+    />
+    <Layout categories={categories} tags={tags}>
+      <Box
+        maxWidth="container.lg"
+        width="100%"
+        paddingX="6"
       >
-        <Heading as="h1" fontSize="2xl">
-          { configuration.ui.tags }
-        </Heading>
-        <Box>
-          <UnorderedList listStyleType="none">
-            {
+        <VStack
+          gap="4"
+          paddingY="8"
+          alignItems="flex-start"
+        >
+          <Heading as="h1" fontSize="2xl">
+            { configuration.ui.tags }
+          </Heading>
+          <Box>
+            <UnorderedList listStyleType="none">
+              {
               tags.map((tag) => (
                 <ListItem>
                   <Link
@@ -48,11 +53,12 @@ const Home: NextPage = ({ categories, tags }) => (
                 </ListItem>
               ))
             }
-          </UnorderedList>
-        </Box>
-      </VStack>
-    </Box>
-  </Layout>
+            </UnorderedList>
+          </Box>
+        </VStack>
+      </Box>
+    </Layout>
+  </>
 )
 
 export async function getStaticProps () {

@@ -11,6 +11,7 @@ import {
   chakra,
 } from '@chakra-ui/react'
 import { getMDXComponent } from 'mdx-bundler/client'
+import { NextSeo } from 'next-seo'
 import {
   FacebookIcon,
   FacebookShareButton,
@@ -34,6 +35,7 @@ import {
   Quote,
   Toc,
 } from '../../components'
+import { configuration } from '../../config'
 
 const components = {
   Alert,
@@ -133,91 +135,105 @@ export const PostDetail = ({ host, post, slug }) => {
   const router = useRouter()
   const { content, frontmatter, toc } = post
   const Component = React.useMemo(() => getMDXComponent(content), [content])
+  const textToShare = frontmatter.subtitle
+    ? `${frontmatter.title}: ${frontmatter.subtitle}`
+    : `${frontmatter.title}`
 
   return (
-    <Box width="100%">
-      <HStack backgroundColor="blue.50" width="100%" justifyContent="center">
-        <Box
-          maxWidth="container.lg"
-          width="100%"
-          paddingX="6"
-          paddingY="8"
-        >
-          <PostTitle
-            title={frontmatter.title}
-            subtitle={frontmatter?.subtitle}
-          />
-        </Box>
-      </HStack>
-      <HStack width="100%" justifyContent="center">
-        <Box
-          maxWidth="container.lg"
-          width="100%"
-          paddingX="6"
-          paddingTop="8"
-        >
-          <Grid
-            templateColumns={['1fr', '1fr', '1fr', '1fr 250px']}
-            gap="8"
+    <>
+      <NextSeo
+        title={`${textToShare} | ${configuration.ui.header.title.text}`}
+        description={frontmatter.excerpt}
+        openGraph={{
+          description: frontmatter.excerpt,
+          title: `${textToShare} | ${configuration.ui.header.title.text}`,
+          url: `${host}/${router.asPath}`,
+        }}
+      />
+      <Box width="100%">
+        <HStack backgroundColor="blue.50" width="100%" justifyContent="center">
+          <Box
+            maxWidth="container.lg"
+            width="100%"
+            paddingX="6"
+            paddingY="8"
           >
-            <Box>
-              <Component components={components} />
-            </Box>
-            <Toc toc={toc} />
-          </Grid>
-        </Box>
-      </HStack>
-      <HStack width="100%" justifyContent="center">
-        <HStack
-          maxWidth="container.lg"
-          width="100%"
-          paddingX="6"
-          paddingY="8"
-        >
-          <FacebookShareButton
-            url={`${host}/${router.asPath}`}
-            quote="next-share is a social share buttons for your next React apps."
-            hashtag="#nextshare"
-          >
-            <FacebookIcon size={42} round />
-          </FacebookShareButton>
-          <TwitterShareButton
-            url="https://github.com/next-share"
-            title="next-share is a social share buttons for your next React apps."
-          >
-            <TwitterIcon size={42} round />
-          </TwitterShareButton>
-          <LinkedinShareButton url="https://github.com/next-share">
-            <LinkedinIcon size={42} round />
-          </LinkedinShareButton>
-          <TelegramShareButton
-            url="https://github.com/next-share"
-            title="next-share is a social share buttons for your next React apps."
-          >
-            <TelegramIcon size={42} round />
-          </TelegramShareButton>
-          <WhatsappShareButton
-            url="https://github.com/next-share"
-            title="next-share is a social share buttons for your next React apps."
-            separator=":: "
-          >
-            <WhatsappIcon size={42} round />
-          </WhatsappShareButton>
+            <PostTitle
+              title={frontmatter.title}
+              subtitle={frontmatter?.subtitle}
+            />
+          </Box>
         </HStack>
-      </HStack>
-      <HStack width="100%" justifyContent="center">
-        <Box
-          maxWidth="container.lg"
-          width="100%"
-          paddingX="6"
-          paddingY="8"
-        >
-          <Comments
-            slug={slug}
-            title={frontmatter.title}
-          />
-        </Box>
-      </HStack>
-    </Box>
+        <HStack width="100%" justifyContent="center">
+          <Box
+            maxWidth="container.lg"
+            width="100%"
+            paddingX="6"
+            paddingTop="8"
+          >
+            <Grid
+              templateColumns={['1fr', '1fr', '1fr', '1fr 250px']}
+              gap="8"
+            >
+              <Box>
+                <Component components={components} />
+              </Box>
+              <Toc toc={toc} />
+            </Grid>
+          </Box>
+        </HStack>
+        <HStack width="100%" justifyContent="center">
+          <HStack
+            maxWidth="container.lg"
+            width="100%"
+            paddingX="6"
+            paddingY="8"
+          >
+            <FacebookShareButton
+              url={`${host}/${router.asPath}`}
+              quote={textToShare}
+              hashtag="#nextshare"
+            >
+              <FacebookIcon size={42} round />
+            </FacebookShareButton>
+            <TwitterShareButton
+              url={`${host}/${router.asPath}`}
+              title="textToShare"
+            >
+              <TwitterIcon size={42} round />
+            </TwitterShareButton>
+            <LinkedinShareButton url={`${host}/${router.asPath}`}>
+              <LinkedinIcon size={42} round />
+            </LinkedinShareButton>
+            <TelegramShareButton
+              url={`${host}/${router.asPath}`}
+              title="textToShare"
+            >
+              <TelegramIcon size={42} round />
+            </TelegramShareButton>
+            <WhatsappShareButton
+              url={`${host}/${router.asPath}`}
+              title="textToShare"
+              separator=":: "
+            >
+              <WhatsappIcon size={42} round />
+            </WhatsappShareButton>
+          </HStack>
+        </HStack>
+        <HStack width="100%" justifyContent="center">
+          <Box
+            maxWidth="container.lg"
+            width="100%"
+            paddingX="6"
+            paddingY="8"
+          >
+            <Comments
+              slug={slug}
+              title={frontmatter.title}
+            />
+          </Box>
+        </HStack>
+      </Box>
+    </>
   )
 }

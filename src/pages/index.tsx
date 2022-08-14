@@ -1,6 +1,8 @@
 import type { NextPage } from 'next'
+import { NextSeo } from 'next-seo'
 
 import { Layout } from '../components'
+import { configuration } from '../config'
 import {
   getAllPosts,
   getCategoriesFromPosts,
@@ -9,11 +11,16 @@ import {
 import { PostList } from '../templates'
 
 const Home: NextPage = ({ categories, posts, tags }) => (
-  <Layout categories={categories} tags={tags}>
-    <PostList
-      posts={posts}
+  <>
+    <NextSeo
+      title={`${configuration.ui.home} | ${configuration.ui.header.title.text}`}
     />
-  </Layout>
+    <Layout categories={categories} tags={tags}>
+      <PostList
+        posts={posts}
+      />
+    </Layout>
+  </>
 )
 
 export async function getStaticProps () {

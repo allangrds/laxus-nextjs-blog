@@ -64,6 +64,7 @@ export const MenuMobile = ({ isOpen, navigation }: MenuDesktopProps) => (
                               as="a"
                               fontWeight="600"
                               fontSize="xl"
+                              cursor="pointer"
                             >
                               {child.title}
                             </Text>

@@ -1,7 +1,11 @@
 export const configuration = {
+  logic: {
+    'posts-pagination-quantity': 5,
+  },
   ui: {
     about: 'About',
     categories: 'Categories',
+    comments: 'Comments',
     header: {
       navigation: {
         about: 'about',
@@ -13,8 +17,8 @@ export const configuration = {
         text: 'Laxus',
       },
     },
-    tags: 'Tags',
+    home: 'Home',
     'posts-of': 'Posts of',
-    comments: 'Comments',
+    tags: 'Tags',
   },
 }

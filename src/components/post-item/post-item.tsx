@@ -19,7 +19,7 @@ export const PostItem = ({
   categories, excerpt, slug, subtitle, tags, title,
 }: PostItemProps) => (
   <Box as="article">
-    <Link href={`posts/${slug}`}>
+    <Link href={`/posts/${slug}`}>
       <a style={{ width: '100%' }}>
         <Heading
           as="h1"

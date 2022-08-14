@@ -6,12 +6,10 @@ import { pt } from 'date-fns/locale'
 import matter from 'gray-matter'
 import { bundleMDX } from 'mdx-bundler'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypePrism from 'rehype-prism'
 import rehypeSlug from 'rehype-slug'
 
-// import remarkCodeTitles from 'remark-code-titles'
-import remarkPrism from 'remark-prism'
-
-import remarkCodeTitles from './remark-code-title'
+import { rehypeMetaAttribute } from './rehype-meta-attributes'
 import remarkTocHeadings from './remark-toc-headings'
 
 const root = process.cwd()
@@ -30,16 +28,17 @@ export function getPostBySlug (slug: string) {
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { content, data } = matter(fileContents)
 
-  // const date = format(new Date(data.date), "dd 'de' MMMM 'de' yyyy", {
-  //   locale: pt,
-  // })
+  const date = format(new Date(data.date), "dd 'de' MMMM 'de' yyyy", {
+    locale: pt,
+  })
 
   return {
     content,
-    // date: data.date.toString(),
     fileContents,
-    // frontmatter: { ...data, date },
-    frontmatter: data,
+    frontmatter: {
+      ...data,
+      parsedData: date,
+    },
     slug: realSlug,
   }
 }
@@ -50,7 +49,10 @@ export function getAllPosts () {
   const posts = slugs
     .map((slug) => getPostBySlug(slug))
     .sort((post1, post2) => (
-      new Date(post1.date) > new Date(post2.date) ? -1 : 1))
+      new Date(post1?.frontmatter.date) > new Date(post2.frontmatter.date)
+        ? -1
+        : 1
+    ))
 
   return posts
 }
@@ -82,19 +84,18 @@ export const getPostDetail = async (slug: string) => {
   const toc = []
 
   const { code, frontmatter } = await bundleMDX({
-    source: post?.content,
-    cwd: path.join(root),
+    source: post?.fileContents,
     mdxOptions (options) {
-      options.remarkPlugins = [
-        ...(options.remarkPlugins ?? []),
-        remarkPrism,
-        remarkCodeTitles,
-        [remarkTocHeadings, { exportRef: toc }],
-      ]
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
+        rehypeMetaAttribute,
         rehypeSlug,
         rehypeAutolinkHeadings,
+        rehypePrism,
+      ]
+      options.remarkPlugins = [
+        ...(options.remarkPlugins ?? []),
+        [remarkTocHeadings, { exportRef: toc }],
       ]
 
       return options

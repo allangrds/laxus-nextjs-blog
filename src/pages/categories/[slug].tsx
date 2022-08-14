@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { NextSeo } from 'next-seo'
 
 import { Layout } from '../../components'
 import { configuration } from '../../config'
@@ -16,12 +17,17 @@ const capitalizeFirstLetter = (str: string) => (
 const CategoriesPosts: NextPage = ({
   categories, category, posts, tags,
 }) => (
-  <Layout categories={categories} tags={tags}>
-    <PostList
-      posts={posts}
-      title={`${configuration.ui['posts-of']} ${capitalizeFirstLetter(category)}`}
+  <>
+    <NextSeo
+      title={`${configuration.ui['posts-of']} ${capitalizeFirstLetter(category)} | ${configuration.ui.header.title.text}`}
     />
-  </Layout>
+    <Layout categories={categories} tags={tags}>
+      <PostList
+        posts={posts}
+        title={`${configuration.ui['posts-of']} ${capitalizeFirstLetter(category)}`}
+      />
+    </Layout>
+  </>
 )
 
 export async function getStaticPaths () {

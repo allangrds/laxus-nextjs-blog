@@ -9,8 +9,6 @@ export const Pre = (props) => {
   const [hovered, setHovered] = React.useState(false)
   const [copied, setCopied] = React.useState(false)
 
-  // console.log({ props })
-
   const onEnter = () => {
     setHovered(true)
   }
@@ -40,14 +38,29 @@ export const Pre = (props) => {
       marginY="8"
       maxWidth={['none', 'none', 'none', '700px']}
       overflowX="scroll"
+      backgroundColor="#374151"
+      borderRadius="0.5em"
+      paddingBottom="0"
     >
+      {
+        props.filename
+          ? (
+            <HStack paddingY="3" paddingX="4" alignItems="center">
+              <Text color="white" fontWeight="600">
+                {props.filename}
+              </Text>
+            </HStack>
+          )
+          : undefined
+      }
+
       {
         hovered
           ? (
             <HStack
               position="absolute"
               right="2"
-              top="4"
+              top={props.filename ? '14' : '2'}
             >
               {
                 copied
