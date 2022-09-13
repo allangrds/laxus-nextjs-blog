@@ -6,16 +6,19 @@ import { configuration } from '../config'
 import {
   getAllPosts,
   getCategoriesFromPosts,
+  getSeriesFromPosts,
   getTagsFromPosts,
 } from '../lib/api'
 import { PostList } from '../templates'
 
-const Home: NextPage = ({ categories, posts, tags }) => (
+const Home: NextPage = ({
+  categories, posts, series, tags,
+}) => (
   <>
     <NextSeo
       title={`${configuration.ui.home} | ${configuration.ui.header.title.text}`}
     />
-    <Layout categories={categories} tags={tags}>
+    <Layout categories={categories} series={series} tags={tags}>
       <PostList
         posts={posts}
       />
@@ -26,12 +29,14 @@ const Home: NextPage = ({ categories, posts, tags }) => (
 export async function getStaticProps () {
   const posts = getAllPosts()
   const categories = getCategoriesFromPosts()
+  const series = getSeriesFromPosts()
   const tags = getTagsFromPosts()
 
   return {
     props: {
       categories,
       posts,
+      series,
       tags,
     },
   }

@@ -21,6 +21,10 @@ export const PostList = ({ posts, title }) => {
     sortedPosts.slice(count.prev, count.next)
   )
 
+  React.useEffect(() => {
+    setCurrent(sortedPosts.slice(count.prev, count.next))
+  }, [posts])
+
   const getMoreData = () => {
     if (current.length === sortedPosts.length) {
       setHasMore(false)
@@ -75,6 +79,7 @@ export const PostList = ({ posts, title }) => {
                 excerpt={post.frontmatter.excerpt}
                 subtitle={post.frontmatter.subtitle}
                 categories={post.frontmatter.categories}
+                serie={post.frontmatter.series}
                 tags={post.frontmatter.tags}
                 title={post.frontmatter.title}
                 slug={post.slug}

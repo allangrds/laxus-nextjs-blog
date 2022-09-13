@@ -161,6 +161,7 @@ export const PostDetail = ({ host, post, slug }) => {
             <PostTitle
               title={frontmatter.title}
               subtitle={frontmatter?.subtitle}
+              date={frontmatter.parsedData}
             />
           </Box>
         </HStack>

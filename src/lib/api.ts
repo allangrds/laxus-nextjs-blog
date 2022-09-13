@@ -1,5 +1,5 @@
 import fs from 'fs'
-import path, { join } from 'path'
+import { join } from 'path'
 
 import { format } from 'date-fns'
 import { pt } from 'date-fns/locale'
@@ -12,7 +12,6 @@ import rehypeSlug from 'rehype-slug'
 import { rehypeMetaAttribute } from './rehype-meta-attributes'
 import remarkTocHeadings from './remark-toc-headings'
 
-const root = process.cwd()
 const postsDirectory = join(process.cwd(), 'posts')
 const onlyUnique = (value, index, self) => (
   self.indexOf(value) === index
@@ -28,9 +27,7 @@ export function getPostBySlug (slug: string) {
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { content, data } = matter(fileContents)
 
-  const date = format(new Date(data.date), "dd 'de' MMMM 'de' yyyy", {
-    locale: pt,
-  })
+  const date = format(new Date(data.date), 'MMMM, dd, yyyy')
 
   return {
     content,
@@ -67,6 +64,16 @@ export function getCategoriesFromPosts () {
   return uniqueCategories
 }
 
+export function getSeriesFromPosts () {
+  const posts = getAllPosts()
+  const allSeries = posts
+    .map((post) => post.frontmatter.series)
+    .flat()
+  const uniqueSeries = allSeries.filter(onlyUnique)
+
+  return uniqueSeries
+}
+
 export function getTagsFromPosts (): string[] {
   const posts = getAllPosts()
   const allTags = posts
@@ -80,6 +87,7 @@ export function getTagsFromPosts (): string[] {
 export const getPostDetail = async (slug: string) => {
   const post = getPostBySlug(slug)
   const categories = getCategoriesFromPosts()
+  const series = getSeriesFromPosts()
   const tags = getTagsFromPosts()
   const toc = []
 
@@ -109,6 +117,7 @@ export const getPostDetail = async (slug: string) => {
       frontmatter: post?.frontmatter,
       toc,
     },
+    series,
     tags,
   }
 }
@@ -130,6 +139,16 @@ export function getAllPostsFromCategory (slug: string) {
     post.frontmatter.categories.some(
       (element: string) => element === slug
     )
+  ))
+
+  return filteredPosts
+}
+
+export function getAllPostsFromSerie (slug: string) {
+  const posts = getAllPosts()
+
+  const filteredPosts = posts.filter((post) => (
+    post.frontmatter.series === slug
   ))
 
   return filteredPosts

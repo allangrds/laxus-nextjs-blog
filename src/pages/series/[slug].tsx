@@ -4,7 +4,7 @@ import { NextSeo } from 'next-seo'
 import { Layout } from '../../components'
 import { configuration } from '../../config'
 import {
-  getAllPostsFromTag,
+  getAllPostsFromSerie,
   getCategoriesFromPosts,
   getSeriesFromPosts,
   getTagsFromPosts,
@@ -15,25 +15,25 @@ const capitalizeFirstLetter = (str: string) => (
   str.charAt(0).toUpperCase() + str.slice(1)
 )
 
-const TagsPosts: NextPage = ({
-  categories, posts, series, tag, tags,
+const SeriesPosts: NextPage = ({
+  categories, posts, serie, series, tags,
 }) => (
   <>
     <NextSeo
-      title={`${configuration.ui['posts-of']} ${capitalizeFirstLetter(tag)} | ${configuration.ui.header.title.text}`}
+      title={`${configuration.ui['posts-of']} ${capitalizeFirstLetter(serie.replace(/-/g, ' '))} | ${configuration.ui.header.title.text}`}
     />
     <Layout categories={categories} series={series} tags={tags}>
       <PostList
         posts={posts}
-        title={`${configuration.ui['posts-of']} ${capitalizeFirstLetter(tag)}`}
+        title={`${configuration.ui['posts-of']} ${capitalizeFirstLetter(serie.replace(/-/g, ' '))}`}
       />
     </Layout>
   </>
 )
 
 export async function getStaticPaths () {
-  const tags = getTagsFromPosts()
-  const paths = tags.map((tag) => ({ params: { slug: tag } }))
+  const series = getSeriesFromPosts()
+  const paths = series.map((serie) => ({ params: { slug: serie } }))
 
   return {
     fallback: false,
@@ -44,7 +44,7 @@ export async function getStaticPaths () {
 export async function getStaticProps ({ params }) {
   const { slug } = params
 
-  const posts = getAllPostsFromTag(slug)
+  const posts = getAllPostsFromSerie(slug)
   const categories = getCategoriesFromPosts()
   const series = getSeriesFromPosts()
   const tags = getTagsFromPosts()
@@ -52,12 +52,12 @@ export async function getStaticProps ({ params }) {
   return {
     props: {
       categories,
+      serie: slug,
       posts,
       series,
-      tag: slug,
       tags,
     },
   }
 }
 
-export default TagsPosts
+export default SeriesPosts

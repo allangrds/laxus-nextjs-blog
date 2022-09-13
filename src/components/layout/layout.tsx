@@ -6,29 +6,44 @@ import { HeaderMenu } from '../header-menu'
 type LayoutProps = {
   categories?: string[]
   children: React.ReactNode
+  series?: string[]
   tags?: string[]
 }
 
 const buildMenuWithChildren = (
   values?: string[],
-  type: 'categories' | 'tags'
+  type: 'categories' | 'tags' | 'series'
 ) => {
   if (!values) {
     return {}
   }
 
   return {
-    children: values.map((value: string) => ({
-      path: `/${type}/${value}`,
-      title: value,
-    })),
+    children: values.map((value: string) => {
+      if (type === 'series') {
+        const newValue = value.replace(/-/g, ' ')
+
+        return {
+          path: `/${type}/${value}`,
+          title: newValue,
+        }
+      }
+
+      return {
+        path: `/${type}/${value}`,
+        title: value,
+      }
+    }),
     path: `/${type}`,
     title: configuration.ui.header.navigation[type],
   }
 }
 
-export const Layout = ({ categories, children, tags }: LayoutProps) => {
+export const Layout = ({
+  categories, children, series, tags,
+}: LayoutProps) => {
   const linksCategories = buildMenuWithChildren(categories, 'categories')
+  const linksSeries = buildMenuWithChildren(series, 'series')
   const linksTags = buildMenuWithChildren(tags, 'tags')
 
   return (
@@ -47,6 +62,7 @@ export const Layout = ({ categories, children, tags }: LayoutProps) => {
                 title: configuration.ui.header.navigation.home,
               },
               { ...linksCategories },
+              { ...linksSeries },
               { ...linksTags },
               {
                 path: '/about',

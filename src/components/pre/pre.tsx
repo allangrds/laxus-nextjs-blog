@@ -4,6 +4,8 @@ import {
   Box, HStack, Icon, IconButton, Text, chakra,
 } from '@chakra-ui/react'
 
+import { configuration } from '../../config'
+
 export const Pre = (props) => {
   const textInput = React.useRef(null)
   const [hovered, setHovered] = React.useState(false)
@@ -37,7 +39,7 @@ export const Pre = (props) => {
       onMouseLeave={onExit}
       marginY="8"
       maxWidth={['none', 'none', 'none', '700px']}
-      overflowX="scroll"
+      // overflowX="scroll"
       backgroundColor="#374151"
       borderRadius="0.5em"
       paddingBottom="0"
@@ -71,7 +73,7 @@ export const Pre = (props) => {
                       paddingY="1"
                       borderRadius="4"
                     >
-                      <Text fontSize="sm">Copied!</Text>
+                      <Text fontSize="sm">{configuration.ui.components.pre.copied}</Text>
                     </Box>
                   )
                   : undefined

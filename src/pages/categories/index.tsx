@@ -9,15 +9,16 @@ import { Layout } from '../../components'
 import { configuration } from '../../config'
 import {
   getCategoriesFromPosts,
+  getSeriesFromPosts,
   getTagsFromPosts,
 } from '../../lib/api'
 
-const Home: NextPage = ({ categories, tags }) => (
+const Home: NextPage = ({ categories, series, tags }) => (
   <>
     <NextSeo
       title={`${configuration.ui.categories} | ${configuration.ui.header.title.text}`}
     />
-    <Layout categories={categories} tags={tags}>
+    <Layout categories={categories} series={series} tags={tags}>
       <Box
         maxWidth="container.lg"
         width="100%"
@@ -60,11 +61,13 @@ const Home: NextPage = ({ categories, tags }) => (
 
 export async function getStaticProps () {
   const categories = getCategoriesFromPosts()
+  const series = getSeriesFromPosts()
   const tags = getTagsFromPosts()
 
   return {
     props: {
       categories,
+      series,
       tags,
     },
   }

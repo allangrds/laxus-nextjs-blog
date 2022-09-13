@@ -8,9 +8,9 @@ import {
 import { PostDetail } from '../../templates'
 
 const PostsSlug: NextPage = ({
-  categories, host, post, slug, tags,
+  categories, host, post, series, slug, tags,
 }) => (
-  <Layout categories={categories} tags={tags}>
+  <Layout categories={categories} series={series} tags={tags}>
     <PostDetail host={host} post={post} slug={slug} />
   </Layout>
 )

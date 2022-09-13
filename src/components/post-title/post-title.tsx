@@ -1,11 +1,12 @@
-import { Box, Heading } from '@chakra-ui/react'
+import { Box, Heading, Text } from '@chakra-ui/react'
 
 export type PostTitleProps = {
+  date: string;
   subtitle?: string;
   title: string;
 }
 
-export const PostTitle = ({ subtitle, title }: PostTitleProps) => (
+export const PostTitle = ({ date, subtitle, title }: PostTitleProps) => (
   <Box>
     <Heading
       as="h1"
@@ -30,5 +31,6 @@ export const PostTitle = ({ subtitle, title }: PostTitleProps) => (
         )
         : undefined
     }
+    <Text marginTop={8} fontSize="lg">{date}</Text>
   </Box>
 )

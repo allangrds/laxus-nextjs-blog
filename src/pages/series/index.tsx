@@ -13,10 +13,10 @@ import {
   getTagsFromPosts,
 } from '../../lib/api'
 
-const Tags: NextPage = ({ categories, series, tags }) => (
+const Series: NextPage = ({ categories, series, tags }) => (
   <>
     <NextSeo
-      title={`${configuration.ui.tags} | ${configuration.ui.header.title.text}`}
+      title={`${configuration.ui.categories} | ${configuration.ui.header.title.text}`}
     />
     <Layout categories={categories} series={series} tags={tags}>
       <Box
@@ -30,17 +30,14 @@ const Tags: NextPage = ({ categories, series, tags }) => (
           alignItems="flex-start"
         >
           <Heading as="h1" fontSize="2xl">
-            { configuration.ui.tags }
+            { configuration.ui.series }
           </Heading>
           <Box>
             <UnorderedList listStyleType="none">
               {
-              tags.map((tag) => (
+              series.map((serie: string) => (
                 <ListItem>
-                  <Link
-                    href={`/tags/${tag}`}
-                    as={`/tags/${tag}`}
-                  >
+                  <Link href={`/series/${serie}`}>
                     <Text
                       as="a"
                       cursor="pointer"
@@ -48,7 +45,7 @@ const Tags: NextPage = ({ categories, series, tags }) => (
                       fontSize="xl"
                       lineHeight="8"
                     >
-                      { tag }
+                      { serie.replace(/-/g, ' ') }
                     </Text>
                   </Link>
                 </ListItem>
@@ -76,4 +73,4 @@ export async function getStaticProps () {
   }
 }
 
-export default Tags
+export default Series

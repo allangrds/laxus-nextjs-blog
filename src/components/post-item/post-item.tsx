@@ -16,7 +16,7 @@ export type PostItemProps = {
 }
 
 export const PostItem = ({
-  categories, excerpt, slug, subtitle, tags, title,
+  categories, excerpt, serie, slug, subtitle, tags, title,
 }: PostItemProps) => (
   <Box as="article">
     <Link href={`/posts/${slug}`}>
@@ -90,6 +90,22 @@ export const PostItem = ({
             </a>
           </Link>
         ))
+      }
+      {
+        serie
+          ? (
+            <Link
+              href={`/series/${serie}`}
+              as={`/series/${serie}`}
+            >
+              <a>
+                <Badge colorScheme="red">
+                  {serie.replace(/-/g, ' ')}
+                </Badge>
+              </a>
+            </Link>
+          )
+          : undefined
       }
     </HStack>
   </Box>

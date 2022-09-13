@@ -6,6 +6,7 @@ import { configuration } from '../../config'
 import {
   getAllPostsFromCategory,
   getCategoriesFromPosts,
+  getSeriesFromPosts,
   getTagsFromPosts,
 } from '../../lib/api'
 import { PostList } from '../../templates'
@@ -15,13 +16,13 @@ const capitalizeFirstLetter = (str: string) => (
 )
 
 const CategoriesPosts: NextPage = ({
-  categories, category, posts, tags,
+  categories, category, posts, series, tags,
 }) => (
   <>
     <NextSeo
       title={`${configuration.ui['posts-of']} ${capitalizeFirstLetter(category)} | ${configuration.ui.header.title.text}`}
     />
-    <Layout categories={categories} tags={tags}>
+    <Layout categories={categories} series={series} tags={tags}>
       <PostList
         posts={posts}
         title={`${configuration.ui['posts-of']} ${capitalizeFirstLetter(category)}`}
@@ -45,6 +46,7 @@ export async function getStaticProps ({ params }) {
 
   const posts = getAllPostsFromCategory(slug)
   const categories = getCategoriesFromPosts()
+  const series = getSeriesFromPosts()
   const tags = getTagsFromPosts()
 
   return {
@@ -52,6 +54,7 @@ export async function getStaticProps ({ params }) {
       categories,
       category: slug,
       posts,
+      series,
       tags,
     },
   }

@@ -6,11 +6,17 @@ export const configuration = {
     about: 'About',
     categories: 'Categories',
     comments: 'Comments',
+    components: {
+      pre: {
+        copied: 'Copiado!',
+      },
+    },
     header: {
       navigation: {
         about: 'about',
         categories: 'categories',
         home: 'home',
+        series: 'series',
         tags: 'tags',
       },
       title: {
@@ -19,6 +25,7 @@ export const configuration = {
     },
     home: 'Home',
     'posts-of': 'Posts of',
+    series: 'Series',
     tags: 'Tags',
   },
 }
