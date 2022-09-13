@@ -147,7 +147,7 @@ export const PostDetail = ({ host, post, slug }) => {
         openGraph={{
           description: frontmatter.excerpt,
           title: `${textToShare} | ${configuration.ui.header.title.text}`,
-          url: `${host}/${router.asPath}`,
+          url: `${host}${router.asPath}`,
         }}
       />
       <Box width="100%">
@@ -191,30 +191,30 @@ export const PostDetail = ({ host, post, slug }) => {
             paddingY="8"
           >
             <FacebookShareButton
-              url={`${host}/${router.asPath}`}
+              url={`${host}${router.asPath}`}
               quote={textToShare}
               hashtag="#nextshare"
             >
               <FacebookIcon size={42} round />
             </FacebookShareButton>
             <TwitterShareButton
-              url={`${host}/${router.asPath}`}
-              title="textToShare"
+              url={`${host}${router.asPath}`}
+              title={textToShare}
             >
               <TwitterIcon size={42} round />
             </TwitterShareButton>
-            <LinkedinShareButton url={`${host}/${router.asPath}`}>
+            <LinkedinShareButton url={`${host}${router.asPath}`}>
               <LinkedinIcon size={42} round />
             </LinkedinShareButton>
             <TelegramShareButton
-              url={`${host}/${router.asPath}`}
-              title="textToShare"
+              url={`${host}${router.asPath}`}
+              title={textToShare}
             >
               <TelegramIcon size={42} round />
             </TelegramShareButton>
             <WhatsappShareButton
-              url={`${host}/${router.asPath}`}
-              title="textToShare"
+              url={`${host}${router.asPath}`}
+              title={textToShare}
               separator=":: "
             >
               <WhatsappIcon size={42} round />
