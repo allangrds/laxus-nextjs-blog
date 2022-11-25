@@ -1,0 +1,19 @@
+import * as React from 'react'
+import { render, screen } from '@testing-library/react'
+
+import { {{pascalCase component_name}} } from './{{kebabCase component_name}}'
+
+const selectors = {
+  title: () => screen.getByText(/hello-world/),
+}
+
+const renderComponent = (props?: any) =>
+  render(
+    <{{pascalCase component_name}} {...props} />
+  )
+
+test('loads and displays greeting', async () => {
+  const { debug } = renderComponent()
+
+  expect(selectors.title()).toBeInTheDocument()
+})
